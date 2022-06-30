@@ -67,6 +67,11 @@
     {!! Form::textarea('description', $feature->description, ['class' => 'form-control wysiwyg']) !!}
 </div>
 
+<div class="col-md form-group">
+    {!! Form::checkbox('is_released', 1, $feature->id ? $feature->is_released : 1, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
+    {!! Form::label('is_released', 'Is Released', ['class' => 'form-check-label ml-3']) !!} {!! add_help('If this is off, users will not be able to view information for the item/it will be hidden from view. This is overridden by the item being owned at any point by anyone on the site.') !!}
+</div>
+
 <div class="text-right">
     {!! Form::submit($feature->id ? 'Edit' : 'Create', ['class' => 'btn btn-primary']) !!}
 </div>

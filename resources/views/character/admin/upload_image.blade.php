@@ -126,7 +126,7 @@ Traits
     </div>
     <div><a href="#" class="btn btn-primary" id="add-feature">Add Trait</a></div>
     <div class="feature-row hide mb-2">
-        {!! Form::select('feature_id[]', $features, null, ['class' => 'form-control mr-2 feature-select', 'placeholder' => 'Select Trait']) !!}
+        {!! Form::select('feature_id[]', $features->where('is_released', 1), null, ['class' => 'form-control mr-2 feature-select', 'placeholder' => 'Select Trait']) !!}
         {!! Form::text('feature_data[]', null, ['class' => 'form-control mr-2', 'placeholder' => 'Extra Info (Optional)']) !!}
         <a href="#" class="remove-feature btn btn-danger mb-2">×</a>
     </div>

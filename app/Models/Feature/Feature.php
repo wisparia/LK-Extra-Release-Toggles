@@ -17,7 +17,7 @@ class Feature extends Model
      * @var array
      */
     protected $fillable = [
-        'feature_category_id', 'species_id', 'subtype_id', 'rarity_id', 'name', 'has_image', 'description', 'parsed_description'
+        'feature_category_id', 'species_id', 'subtype_id', 'rarity_id', 'name', 'has_image', 'description', 'parsed_description', 'is_released',
     ];
 
     /**
@@ -124,6 +124,11 @@ class Feature extends Model
     {
         $ids = FeatureCategory::orderBy('sort', 'DESC')->pluck('id')->toArray();
         return count($ids) ? $query->orderByRaw(DB::raw('FIELD(feature_category_id, '.implode(',', $ids).')')) : $query;
+    }
+
+    public function scopeReleased($query)
+    {
+        return $query->where('is_released', 1);
     }
 
     /**

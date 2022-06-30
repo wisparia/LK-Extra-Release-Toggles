@@ -148,7 +148,7 @@ class WorldController extends Controller
      */
     public function getFeatures(Request $request)
     {
-        $query = Feature::with('category')->with('rarity')->with('species');
+        $query = Feature::with('category')->with('rarity')->with('species')->released();
         $data = $request->only(['rarity_id', 'feature_category_id', 'species_id', 'name', 'sort']);
         if(isset($data['rarity_id']) && $data['rarity_id'] != 'none')
             $query->where('rarity_id', $data['rarity_id']);
@@ -209,6 +209,7 @@ class WorldController extends Controller
         $categories = FeatureCategory::orderBy('sort', 'DESC')->get();
         $rarities = Rarity::orderBy('sort', 'ASC')->get();
         $species = Species::where('id', $id)->first();
+        $feature = Feature::where('id', $id)->released()->first();
         if(!$species) abort(404);
         if(!Config::get('lorekeeper.extensions.species_trait_index')) abort(404);
 
